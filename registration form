@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <style>
+        /* Basic styling for the form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Information Form</h1>
+    <form onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="college">College:</label>
+        <input type="text" id="college" name="college">
+        <label for="year">Year:</label>
+        <select id="year" name="year">
+            <option value="">Select Year</option>
+            <option value="1">Freshman</option>
+            <option value="2">Sophomore</option>
+            <option value="3">Junior</option>
+            <option value="4">Senior</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        function validateForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const college = document.getElementById("college").value;
+            const year = document.getElementById("year").value;
+
+            if (!name || !email || !username || !password) {
+                alert("Please fill in all required fields!");
+                return false;
+            }
+
+            // Further validation can be added here, such as email format check
+
+            return true;
+        }
+    </script>
+</body>
+</html>
