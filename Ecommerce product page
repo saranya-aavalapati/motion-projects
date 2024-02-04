@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern eCommerce Product Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Your Brand Name</a>
+            <ul class="navigation">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <ul class="user-actions">
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Cart (0)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-hero">
+            <div class="product-images">
+                <img src="product-image.jpg" alt="Product Image" id="main-image">
+                <div class="thumbnails">
+                    <img src="product-thumbnail1.jpg" alt="Thumbnail 1">
+                    <img src="product-thumbnail2.jpg" alt="Thumbnail 2">
+                    <img src="product-thumbnail3.jpg" alt="Thumbnail 3">
+                </div>
+            </div>
+            <div class="product-info">
+                <h1>Product Name</h1>
+                <p class="description">
+                    A concise and compelling description of the product's
+                    value proposition and key features.
+                </p>
+                <div class="product-stars">
+                    </div>
+                <p class="price">$19.99</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+
+        <section class="product-details">
+            <h2>Product Details</h2>
+            <ul class="product-features">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+                </ul>
+            <p class="full-description">
+                A more detailed description of the product, including
+                specifications, materials, benefits, and use cases.
+            </p>
+        </section>
+
+        <section class="related-products">
+            <h2>You Might Also Like</h2>
+            <div class="products-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Brand Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
