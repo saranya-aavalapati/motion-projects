@@ -1,0 +1,82 @@
+import random
+
+def welcome_user():
+    """Welcomes the user and introduces the quiz."""
+    print("Welcome to the Python Quiz Game!")
+    print("Get ready to test your knowledge about various topics.")
+
+def get_user_name():
+    """Prompts the user for their name and returns it."""
+    name = input("What is your name? ")
+    return name
+
+def create_questions():
+    """Creates a list of question dictionaries from provided data."""
+    questions = [
+        {"question": "What is the meaning of OOP?",
+         "answers": ["Object-Oriented Programming", "Out-Of-Order Processing", "Overly Obvious Procedure", "Objective Optimization Problem"],
+         "correct_answer": "Object-Oriented Programming"},
+        {"question": "Which data structure efficiently stores unique items?",
+         "answers": ["Set", "List", "Tuple", "Dictionary"],
+         "correct_answer": "Set"},
+        {"question": "What is the output of the following code?\n`python\nprint(True and False)\n`",
+         "answers": ["True", "False", "Error", "Depends"],
+         "correct_answer": "False"},
+        # Add more questions here...
+    ]
+    return questions
+
+def ask_question(question):
+    """Asks a single question and returns the user's answer."""
+    print(question["question"])
+    for i, answer in enumerate(question["answers"]):
+        print(f"{i+1}. {answer}")
+    user_answer = input("Enter your answer: ")
+    return user_answer
+
+def check_answer(question, user_answer):
+    """Checks if the user's answer is correct and returns a feedback message."""
+    correct_answer = question["correct_answer"].lower()
+    user_answer_lower = user_answer.lower()
+
+    if user_answer_lower == correct_answer:
+        return "Correct! You earned a point."
+    else:
+        return f"Incorrect. The correct answer is '{correct_answer}'."
+
+def display_score(score, total_questions):
+    """Displays the user's final score and percentage."""
+    percentage = round((score / total_questions) * 100, 2)
+    print(f"Your final score is {score}/{total_questions} ({percentage}%)")
+
+def play_again():
+    """Asks the user if they want to play again and returns True if yes, False otherwise."""
+    answer = input("Do you want to play again? (y/n): ")
+    return answer.lower().startswith("y")
+
+def main():
+    """Main function that runs the quiz game."""
+
+    welcome_user()
+    name = get_user_name()
+
+    questions = create_questions()
+    total_questions = len(questions)
+
+    score = 0
+    for question in questions:
+        user_answer = ask_question(question)
+        feedback = check_answer(question, user_answer)
+        print(feedback)
+        if feedback.startswith("Correct"):
+            score += 1
+
+    display_score(score, total_questions)
+
+    if play_again():
+        main()
+    else:
+        print("Thanks for playing!")
+
+if __name__ == "__main__":
+    main()
