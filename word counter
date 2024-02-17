@@ -1,0 +1,41 @@
+def count_words(text):
+  """
+  Counts the number of words in a given text string.
+
+  Args:
+    text: The text string to analyze.
+
+  Returns:
+    The number of words in the text.
+  """
+
+  # Remove leading and trailing whitespace.
+  text = text.strip()
+
+  # Handle empty input
+  if not text:
+    print("You didn't enter any text. Please try again.")
+    return
+
+  # Split the text into words based on whitespace.
+  words = text.split()
+
+  # Count the number of words.
+  word_count = len(words)
+
+  # Print the word count in a user-friendly format.
+  print(f"The text contains {word_count} words.")
+
+def main():
+  """
+  Prompts the user for input and calls the count_words function.
+  """
+
+  print("Enter a sentence or paragraph:")
+  text = input()
+
+  count_words(text)
+
+# Run the main function to start the program.
+if __name__ == "__main__":
+  main()
