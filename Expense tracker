@@ -1,0 +1,109 @@
+import datetime
+import csv
+
+class Expense:
+    """Represents a single expense."""
+    def __init__(self, date, category, description, amount):
+        self.date = date
+        self.category = category
+        self.description = description
+        self.amount = float(amount)
+
+class ExpenseTracker:
+    """Tracks expenses and provides insights."""
+    def __init__(self, filename="expenses.csv"):
+        self.filename = filename
+        self.expenses = self._load_expenses()
+
+    def _load_expenses(self):
+        """Loads expenses from CSV file."""
+        expenses = []
+        try:
+            with open(self.filename, "r") as file:
+                reader = csv.reader(file)
+                next(reader)  # Skip header row
+                for row in reader:
+                    date, category, description, amount = row
+                    expenses.append(Expense(datetime.datetime.strptime(date, "%Y-%m-%d"),
+                                      category, description, amount))
+        except FileNotFoundError:
+            # Create file if it doesn't exist
+            pass
+        return expenses
+
+    def _save_expenses(self):
+        """Saves expenses to CSV file."""
+        with open(self.filename, "w") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Date", "Category", "Description", "Amount"])
+            for expense in self.expenses:
+                writer.writerow([expense.date.strftime("%Y-%m-%d"), expense.category,
+                                 expense.description, str(expense.amount)])
+
+    def add_expense(self, date, category, description, amount):
+        """Adds a new expense."""
+        try:
+            amount = float(amount)
+            if amount <= 0:
+                raise ValueError("Amount must be positive")
+            self.expenses.append(Expense(date, category, description, amount))
+            self._save_expenses()
+            print("Expense added successfully!")
+        except ValueError as e:
+            print(f"Error adding expense: {e}")
+
+    def view_expenses(self):
+        """Displays all expenses."""
+        if not self.expenses:
+            print("No expenses found.")
+            return
+        print("{:<15}{:<20}{:<30}{:>15}".format("Date", "Category", "Description", "Amount"))
+        for expense in self.expenses:
+            print("{:<15}{:<20}{:<30}{:>15.2f}".format(expense.date.strftime("%Y-%m-%d"),
+                                                  expense.category, expense.description, expense.amount))
+
+    def get_monthly_summary(self, month, year):
+        """Returns a summary of expenses for a given month."""
+        total = 0
+        categories = {}
+        for expense in self.expenses:
+            if expense.date.month == month and expense.date.year == year:
+                total += expense.amount
+                if expense.category not in categories:
+                    categories[expense.category] = 0
+                categories[expense.category] += expense.amount
+        return total, categories
+
+    def get_category_breakdown(self):
+        """Provides a breakdown of total expense for each category."""
+        categories = {}
+        for expense in self.expenses:
+            if expense.category not in categories:
+                categories[expense.category] = 0
+            categories[expense.category] += expense.amount
+        return categories
+
+if __name__ == "__main__":
+    tracker = ExpenseTracker()
+
+    # User interface loop
+    while True:
+        print("\nExpense Tracker")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Get Monthly Summary")
+        print("4. Get Category Breakdown")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            try:
+                date_str = input("Enter date (YYYY-MM-DD): ")
+                date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+                category = input("Enter category: ")
+                description = input("Enter description (optional): ")
+                amount = input("Enter amount: ")
+                tracker.add_expense(date, category, description, amount)
+            except ValueError as e:
+                print(f"Invalid input: {e}")
